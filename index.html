@@ -1,140 +1,1172 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" data-theme="dark">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rahul Lengare | Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-</head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Rahul Lengare - Cloud Developer | DevOps Engineer | AWS Specialist">
+<meta name="keywords" content="Cloud Developer, DevOps, AWS, Azure, GCP, Kubernetes, Docker, Terraform">
+<title>Rahul Lengare — Cloud Developer</title>
 
+<!-- Space Mono for monospace/code elements; Cambria is a built-in system serif -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css">
+
+<style>
+/* ══════════════════════════════════════════════════
+   CSS VARIABLES
+══════════════════════════════════════════════════ */
+:root {
+  --bg:            #060812;
+  --bg2:           #0c1022;
+  --bg3:           #111827;
+  --surface:       rgba(255,255,255,0.04);
+  --surface-hover: rgba(255,255,255,0.08);
+  --border:        rgba(255,255,255,0.08);
+  --border-bright: rgba(100,180,255,0.25);
+  --text:          #e8edf5;
+  --text-muted:    #7a8a9e;
+  --accent:        #3b82f6;
+  --accent2:       #8b5cf6;
+  --accent3:       #06b6d4;
+  --glow:          rgba(59,130,246,0.4);
+  --glow2:         rgba(139,92,246,0.3);
+  --gradient:      linear-gradient(135deg,#3b82f6,#8b5cf6);
+  --gradient2:     linear-gradient(135deg,#06b6d4,#3b82f6);
+  --font-display:  Cambria,'Georgia','Times New Roman',serif;
+  --font-mono:     'Space Mono',monospace;
+  --font-body:     Cambria,'Georgia','Times New Roman',serif;
+  --radius:        16px;
+  --radius-sm:     8px;
+  --ease:          0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="light"] {
+  --bg:#f0f4fc; --bg2:#e4ebf7; --bg3:#d8e2f0;
+  --surface:rgba(255,255,255,0.7); --surface-hover:rgba(255,255,255,0.9);
+  --border:rgba(59,130,246,0.15); --border-bright:rgba(59,130,246,0.35);
+  --text:#0f172a; --text-muted:#475569;
+  --glow:rgba(59,130,246,0.2); --glow2:rgba(139,92,246,0.15);
+}
+
+/* ══════════════════════════════════════════════════
+   RESET
+══════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;font-size:16px}
+body{font-family:var(--font-body);background:var(--bg);color:var(--text);
+  overflow-x:hidden;transition:background var(--ease),color var(--ease);line-height:1.7}
+::selection{background:var(--accent);color:#fff}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+::-webkit-scrollbar{width:4px}
+::-webkit-scrollbar-track{background:var(--bg)}
+::-webkit-scrollbar-thumb{background:var(--accent);border-radius:2px}
+
+/* ══════════════════════════════════════════════════
+   SCROLL PROGRESS
+══════════════════════════════════════════════════ */
+#scroll-progress{
+  position:fixed;top:0;left:0;height:3px;width:0%;
+  background:var(--gradient);z-index:9999;
+  transition:width 0.1s linear;box-shadow:0 0 10px var(--glow)
+}
+
+/* ══════════════════════════════════════════════════
+   PARTICLE CANVAS
+══════════════════════════════════════════════════ */
+#particle-canvas{
+  position:fixed;top:0;left:0;width:100%;height:100%;
+  z-index:0;pointer-events:none;opacity:0.5
+}
+
+/* ══════════════════════════════════════════════════
+   NAVIGATION  — logo | centered pill | actions
+══════════════════════════════════════════════════ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;
+  padding:0 2rem;height:70px;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;
+  backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  background:rgba(6,8,18,0.78);border-bottom:1px solid var(--border);
+  transition:all var(--ease)
+}
+[data-theme="light"] nav{background:rgba(240,244,252,0.88)}
+
+.nav-logo{
+  font-family:var(--font-mono);font-size:1.1rem;font-weight:700;
+  background:var(--gradient);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:-0.5px;justify-self:start
+}
+
+/* Pill nav */
+.nav-links{
+  list-style:none;display:flex;align-items:center;
+  background:rgba(255,255,255,0.05);border:1px solid var(--border);
+  border-radius:100px;padding:4px;backdrop-filter:blur(14px)
+}
+[data-theme="light"] .nav-links{background:rgba(59,130,246,0.07)}
+
+.nav-links li a{
+  display:flex;align-items:center;gap:0.3rem;
+  padding:0.4rem 0.9rem;border-radius:100px;
+  font-family:var(--font-mono);font-size:0.68rem;font-weight:400;
+  color:var(--text-muted);transition:all var(--ease);white-space:nowrap
+}
+.nav-links li a i{font-size:0.65rem;opacity:0.65;transition:opacity var(--ease)}
+.nav-links li a:hover,
+.nav-links li a.active{
+  background:var(--gradient);color:#fff !important;
+  -webkit-text-fill-color:#fff;box-shadow:0 2px 18px var(--glow)
+}
+.nav-links li a:hover i,.nav-links li a.active i{opacity:1}
+
+.nav-actions{display:flex;align-items:center;gap:0.75rem;justify-self:end}
+
+.theme-toggle{
+  width:38px;height:38px;border-radius:50%;
+  border:1px solid var(--border);background:var(--surface);color:var(--text);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  font-size:0.9rem;transition:all var(--ease);backdrop-filter:blur(10px)
+}
+.theme-toggle:hover{border-color:var(--accent);color:var(--accent);box-shadow:0 0 15px var(--glow)}
+
+/* Stable 3-line hamburger — no morph ever */
+.hamburger{
+  display:none;flex-direction:column;gap:5px;cursor:pointer;
+  padding:7px;border-radius:8px;
+  border:1px solid var(--border);background:var(--surface);
+  transition:border-color var(--ease)
+}
+.hamburger:hover{border-color:var(--accent)}
+.hamburger span{display:block;width:20px;height:2px;background:var(--text);border-radius:2px}
+
+/* ══════════════════════════════════════════════════
+   MOBILE DRAWER
+══════════════════════════════════════════════════ */
+.mobile-nav{
+  position:fixed;top:70px;right:-100%;
+  width:270px;height:calc(100vh - 70px);
+  background:var(--bg2);border-left:1px solid var(--border);
+  z-index:999;padding:1.5rem;
+  display:flex;flex-direction:column;gap:0.2rem;
+  transition:right 0.4s cubic-bezier(0.4,0,0.2,1);backdrop-filter:blur(20px)
+}
+.mobile-nav.open{right:0}
+.mobile-nav a{
+  display:flex;align-items:center;gap:0.75rem;
+  font-family:var(--font-mono);font-size:0.85rem;
+  color:var(--text-muted);padding:0.85rem 1rem;border-radius:var(--radius-sm);
+  transition:all var(--ease)
+}
+.mobile-nav a i{font-size:0.8rem;width:16px;text-align:center}
+.mobile-nav a:hover{color:var(--accent);background:rgba(59,130,246,0.08)}
+
+/* ══════════════════════════════════════════════════
+   SECTION BASE
+══════════════════════════════════════════════════ */
+section{position:relative;z-index:1;padding:7rem 2rem;max-width:1200px;margin:0 auto}
+.section-label{
+  font-family:var(--font-mono);font-size:0.72rem;letter-spacing:3px;
+  text-transform:uppercase;color:var(--accent3);margin-bottom:0.75rem
+}
+.section-title{
+  font-family:var(--font-display);font-size:clamp(2rem,5vw,3.5rem);
+  font-weight:800;line-height:1.1;margin-bottom:1.5rem;
+  background:linear-gradient(135deg,var(--text) 0%,var(--text-muted) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
+}
+.section-divider{width:60px;height:3px;background:var(--gradient);border-radius:2px;margin-bottom:3rem}
+
+/* ══════════════════════════════════════════════════
+   HERO
+══════════════════════════════════════════════════ */
+#hero{
+  min-height:100vh;max-width:100%;display:flex;align-items:center;
+  justify-content:center;padding:0 2rem;text-align:center;position:relative
+}
+.hero-content{max-width:900px;position:relative;z-index:2}
+
+.hero-badge{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.4rem 1rem;border-radius:100px;
+  border:1px solid var(--border-bright);background:var(--surface);
+  font-family:var(--font-mono);font-size:0.72rem;color:var(--accent3);
+  letter-spacing:1px;margin-bottom:2rem;backdrop-filter:blur(10px)
+}
+.hero-badge::before{
+  content:'';width:6px;height:6px;background:#22c55e;
+  border-radius:50%;animation:pulse 2s infinite
+}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(1.5)}}
+
+.hero-name{
+  font-family:var(--font-display);font-size:clamp(3rem,10vw,7rem);
+  font-weight:800;letter-spacing:-3px;line-height:0.95;margin-bottom:1rem
+}
+.name-first{color:var(--text)}
+.name-last{
+  background:var(--gradient);-webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;background-clip:text
+}
+
+.hero-typing{
+  font-family:var(--font-mono);font-size:clamp(0.9rem,2.5vw,1.2rem);
+  color:var(--accent3);min-height:1.8em;margin-bottom:1.5rem
+}
+.typing-cursor{
+  display:inline-block;width:2px;height:1.1em;
+  background:var(--accent3);vertical-align:text-bottom;animation:blink .8s infinite
+}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+
+.hero-tagline{
+  font-size:clamp(1rem,2vw,1.15rem);color:var(--text-muted);
+  max-width:580px;margin:0 auto 2.5rem;line-height:1.7
+}
+.hero-cta{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+/* ══════════════════════════════════════════════════
+   BUTTONS
+══════════════════════════════════════════════════ */
+.btn{
+  display:inline-flex;align-items:center;gap:0.5rem;
+  padding:0.8rem 1.8rem;border-radius:100px;
+  font-family:var(--font-display);font-size:0.9rem;font-weight:700;
+  cursor:pointer;transition:all var(--ease);border:none;letter-spacing:0.2px
+}
+.btn-primary{background:var(--gradient);color:#fff;box-shadow:0 4px 25px var(--glow)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 35px var(--glow)}
+.btn-ghost{background:var(--surface);color:var(--text);border:1px solid var(--border);backdrop-filter:blur(10px)}
+.btn-ghost:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-2px);box-shadow:0 4px 20px var(--glow)}
+
+/* ══════════════════════════════════════════════════
+   GLASS CARD
+══════════════════════════════════════════════════ */
+.glass{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:var(--radius);backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);transition:all var(--ease)
+}
+.glass:hover{
+  background:var(--surface-hover);border-color:var(--border-bright);
+  transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.3)
+}
+
+/* ══════════════════════════════════════════════════
+   ABOUT
+══════════════════════════════════════════════════ */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center}
+
+.about-avatar-wrap{position:relative;width:320px;height:320px;margin:0 auto}
+.about-avatar{
+  width:100%;height:100%;border-radius:30px;background:var(--gradient);
+  display:flex;align-items:center;justify-content:center;font-size:6rem;
+  position:relative;overflow:hidden
+}
+.about-avatar::before{content:'';position:absolute;inset:3px;border-radius:27px;background:var(--bg2)}
+.about-avatar i{
+  position:relative;z-index:1;background:var(--gradient);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
+}
+.about-ring{
+  position:absolute;border-radius:50%;border:1px solid var(--border-bright);
+  animation:spin 20s linear infinite
+}
+.about-ring-1{width:380px;height:380px;top:50%;left:50%;transform:translate(-50%,-50%)}
+.about-ring-2{
+  width:430px;height:430px;top:50%;left:50%;transform:translate(-50%,-50%);
+  animation-duration:30s;animation-direction:reverse;border-style:dashed;opacity:.4
+}
+@keyframes spin{from{transform:translate(-50%,-50%) rotate(0)}to{transform:translate(-50%,-50%) rotate(360deg)}}
+
+.tech-float{
+  position:absolute;padding:.5rem .9rem;border-radius:100px;
+  font-family:var(--font-mono);font-size:.7rem;font-weight:700;letter-spacing:1px;
+  animation:floatY 4s ease-in-out infinite
+}
+.tech-float-1{top:10%;right:-30px;background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.4);color:var(--accent);animation-delay:0s}
+.tech-float-2{bottom:20%;left:-30px;background:rgba(139,92,246,.15);border:1px solid rgba(139,92,246,.4);color:var(--accent2);animation-delay:1.5s}
+.tech-float-3{bottom:5%;right:10px;background:rgba(6,182,212,.15);border:1px solid rgba(6,182,212,.4);color:var(--accent3);animation-delay:3s}
+@keyframes floatY{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+
+.about-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin:2rem 0}
+.stat-card{padding:1.2rem;border-radius:var(--radius-sm);text-align:center}
+.stat-number{
+  font-family:var(--font-display);font-size:2rem;font-weight:800;
+  background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text
+}
+.stat-label{font-size:.75rem;color:var(--text-muted);margin-top:.2rem}
+
+/* ══════════════════════════════════════════════════
+   SKILLS
+══════════════════════════════════════════════════ */
+.skills-categories{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem}
+.skill-category{padding:2rem;border-radius:var(--radius)}
+.skill-category-title{
+  font-family:var(--font-display);font-size:.8rem;font-weight:700;
+  text-transform:uppercase;letter-spacing:2px;margin-bottom:1.5rem;
+  display:flex;align-items:center;gap:.5rem
+}
+.skill-item{margin-bottom:1.2rem}
+.skill-header{display:flex;justify-content:space-between;font-size:.85rem;margin-bottom:.5rem;font-weight:500}
+.skill-bar{height:5px;background:var(--border);border-radius:3px;overflow:hidden}
+.skill-fill{height:100%;border-radius:3px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1)}
+.fill-blue{background:var(--gradient2)}
+.fill-purple{background:var(--gradient)}
+.fill-cyan{background:linear-gradient(90deg,#06b6d4,#3b82f6)}
+
+/* ══════════════════════════════════════════════════
+   PROJECTS
+══════════════════════════════════════════════════ */
+.filter-tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:2.5rem}
+.filter-tab{
+  padding:.5rem 1.2rem;border-radius:100px;border:1px solid var(--border);
+  background:var(--surface);color:var(--text-muted);
+  font-size:.8rem;font-weight:500;cursor:pointer;transition:all var(--ease);font-family:var(--font-mono)
+}
+.filter-tab:hover,.filter-tab.active{border-color:var(--accent);color:var(--accent);background:rgba(59,130,246,.1)}
+
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:1.5rem}
+.project-card{border-radius:var(--radius);overflow:hidden;transition:all var(--ease)}
+.project-card.hidden{display:none !important}
+
+.project-thumb{
+  height:200px;background:linear-gradient(135deg,var(--bg2),var(--bg3));
+  display:flex;align-items:center;justify-content:center;
+  font-size:4rem;position:relative;overflow:hidden
+}
+.project-thumb::before{content:'';position:absolute;inset:0;background:var(--gradient);opacity:.1}
+.project-thumb-overlay{
+  position:absolute;inset:0;background:rgba(0,0,0,.55);
+  display:flex;align-items:center;justify-content:center;gap:1rem;
+  opacity:0;transition:opacity var(--ease)
+}
+.project-card:hover .project-thumb-overlay{opacity:1}
+.project-body{padding:1.5rem}
+.project-tags{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.75rem}
+.project-tag{
+  padding:.2rem .6rem;border-radius:100px;font-size:.65rem;font-family:var(--font-mono);
+  background:rgba(59,130,246,.15);color:var(--accent);border:1px solid rgba(59,130,246,.25)
+}
+.project-title{font-family:var(--font-display);font-size:1.15rem;font-weight:700;margin-bottom:.5rem}
+.project-desc{font-size:.875rem;color:var(--text-muted);line-height:1.6;margin-bottom:1.2rem}
+.project-links{display:flex;gap:.75rem}
+.project-link{
+  padding:.45rem 1rem;border-radius:100px;font-size:.8rem;font-weight:600;
+  border:1px solid var(--border);background:var(--surface);color:var(--text-muted);
+  cursor:pointer;transition:all var(--ease);display:flex;align-items:center;gap:.4rem
+}
+.project-link:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ══════════════════════════════════════════════════
+   CERTIFICATIONS
+══════════════════════════════════════════════════ */
+.certs-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem}
+.cert-card{padding:1.8rem;border-radius:var(--radius);position:relative;overflow:hidden}
+.cert-card::before{
+  content:'';position:absolute;top:-50%;right:-50%;width:200%;height:200%;
+  background:radial-gradient(circle,var(--glow) 0%,transparent 60%);
+  opacity:0;transition:opacity var(--ease)
+}
+.cert-card:hover::before{opacity:1}
+.cert-badge{
+  width:56px;height:56px;border-radius:var(--radius-sm);background:var(--gradient);
+  display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin-bottom:1rem;color:#fff
+}
+.cert-org{font-family:var(--font-mono);font-size:.7rem;letter-spacing:2px;text-transform:uppercase;color:var(--accent3);margin-bottom:.3rem}
+.cert-name{font-family:var(--font-display);font-size:1rem;font-weight:700;margin-bottom:.3rem}
+.cert-year{font-size:.8rem;color:var(--text-muted)}
+.cert-status{
+  position:absolute;top:1.2rem;right:1.2rem;padding:.25rem .6rem;border-radius:100px;
+  font-size:.65rem;font-weight:600;background:rgba(34,197,94,.15);
+  border:1px solid rgba(34,197,94,.4);color:#22c55e
+}
+
+/* ══════════════════════════════════════════════════
+   EXPERIENCE TIMELINE
+══════════════════════════════════════════════════ */
+.timeline{position:relative;padding-left:2rem}
+.timeline::before{
+  content:'';position:absolute;left:0;top:10px;bottom:0;
+  width:1px;background:linear-gradient(to bottom,var(--accent),transparent)
+}
+.timeline-item{position:relative;padding:0 0 3rem 2rem}
+.timeline-dot{
+  position:absolute;left:-2rem;top:6px;width:12px;height:12px;border-radius:50%;
+  background:var(--gradient);transform:translateX(calc(-50% + .5px));box-shadow:0 0 15px var(--glow)
+}
+.timeline-meta{font-family:var(--font-mono);font-size:.72rem;color:var(--accent3);letter-spacing:1px;margin-bottom:.4rem}
+.timeline-role{font-family:var(--font-display);font-size:1.3rem;font-weight:700;margin-bottom:.2rem}
+.timeline-company{font-size:.9rem;color:var(--text-muted);margin-bottom:1rem}
+.timeline-points{list-style:none}
+.timeline-points li{font-size:.875rem;color:var(--text-muted);padding:.3rem 0 .3rem 1.2rem;position:relative;line-height:1.6}
+.timeline-points li::before{content:'›';position:absolute;left:0;color:var(--accent);font-weight:bold}
+
+/* ══════════════════════════════════════════════════
+   CONTACT
+══════════════════════════════════════════════════ */
+.contact-grid{display:grid;grid-template-columns:1fr 1.5fr;gap:3rem}
+.contact-info{display:flex;flex-direction:column;gap:1.5rem}
+.contact-item{display:flex;align-items:flex-start;gap:1rem}
+.contact-icon{
+  width:44px;height:44px;border-radius:var(--radius-sm);background:var(--gradient);
+  display:flex;align-items:center;justify-content:center;color:#fff;font-size:1rem;flex-shrink:0
+}
+.contact-label{font-size:.75rem;color:var(--text-muted);margin-bottom:.2rem}
+.contact-value{font-weight:700;font-size:.9rem}
+.social-links{display:flex;gap:.75rem;margin-top:1rem}
+.social-link{
+  width:44px;height:44px;border-radius:var(--radius-sm);border:1px solid var(--border);
+  background:var(--surface);display:flex;align-items:center;justify-content:center;
+  color:var(--text-muted);font-size:1rem;cursor:pointer;transition:all var(--ease)
+}
+.social-link:hover{border-color:var(--accent);color:var(--accent);transform:translateY(-3px);box-shadow:0 8px 20px var(--glow)}
+
+.contact-form{display:flex;flex-direction:column;gap:1.2rem}
+.form-group{display:flex;flex-direction:column;gap:.5rem}
+.form-label{font-size:.8rem;font-weight:700;color:var(--text-muted);letter-spacing:.5px}
+.form-input,.form-textarea{
+  width:100%;padding:.9rem 1.2rem;border-radius:var(--radius-sm);border:1px solid var(--border);
+  background:var(--surface);color:var(--text);font-family:var(--font-body);font-size:.9rem;
+  transition:all var(--ease);outline:none
+}
+.form-input:focus,.form-textarea:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(59,130,246,.1)}
+.form-textarea{resize:vertical;min-height:140px}
+.form-error{font-size:.75rem;color:#ef4444;display:none}
+.form-error.show{display:block}
+.form-success{
+  padding:1rem 1.5rem;border-radius:var(--radius-sm);background:rgba(34,197,94,.1);
+  border:1px solid rgba(34,197,94,.3);color:#22c55e;font-size:.875rem;display:none
+}
+.form-success.show{display:block}
+
+/* ══════════════════════════════════════════════════
+   FOOTER
+══════════════════════════════════════════════════ */
+footer{
+  position:relative;z-index:1;border-top:1px solid var(--border);
+  padding:3rem 2rem;max-width:1200px;margin:0 auto;
+  display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:2rem
+}
+.footer-logo{font-family:var(--font-mono);font-size:1rem;font-weight:700;background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.footer-copy{font-size:.8rem;color:var(--text-muted);text-align:center}
+.footer-nav{display:flex;gap:1.5rem;justify-content:flex-end}
+.footer-nav a{font-size:.8rem;color:var(--text-muted);transition:color var(--ease)}
+.footer-nav a:hover{color:var(--accent)}
+
+/* ══════════════════════════════════════════════════
+   BACK TO TOP
+══════════════════════════════════════════════════ */
+#back-to-top{
+  position:fixed;bottom:2rem;right:2rem;width:44px;height:44px;
+  border-radius:50%;background:var(--gradient);color:#fff;border:none;cursor:pointer;
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+  z-index:900;opacity:0;transform:translateY(10px);
+  transition:all var(--ease);box-shadow:0 4px 20px var(--glow)
+}
+#back-to-top.visible{opacity:1;transform:translateY(0)}
+#back-to-top:hover{transform:translateY(-4px)}
+
+/* ══════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════ */
+@media(max-width:900px){
+  .about-grid{grid-template-columns:1fr}
+  .about-visual{order:-1}
+  .skills-categories{grid-template-columns:1fr 1fr}
+  .contact-grid{grid-template-columns:1fr}
+  footer{grid-template-columns:1fr;text-align:center}
+  .footer-nav{justify-content:center}
+}
+@media(max-width:700px){
+  /* Hide pill, show hamburger on mobile */
+  .nav-links{display:none !important}
+  .hamburger{display:flex}
+  nav{display:flex;justify-content:space-between}
+  .skills-categories{grid-template-columns:1fr}
+  section{padding:5rem 1.25rem}
+  .projects-grid{grid-template-columns:1fr}
+  .certs-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:480px){
+  .certs-grid{grid-template-columns:1fr}
+  .hero-name{letter-spacing:-1px}
+}
+</style>
+</head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>👨‍💻 Rahul Lengare</h1>
-            <p class="subtitle">Cloud Developer</p>
-        </header>
+<div id="scroll-progress"></div>
+<canvas id="particle-canvas"></canvas>
 
-        <section class="about">
-            <h2>🙋‍♂️About Me</h2>
-            <p>🎓 Bachelor of Computer Applications (BCA) graduate from SGM College, Karad</p>
-            <p>📚 Currently training in AWS Cloud Services and DevOps tools at Fortune Cloud Technology</p>
-            <p>💻 Passionate about AWS, Linux, automation tools, and cloud best practices — always exploring and learning!</p>
-        </section>
+<!-- ══════════ NAV ══════════ -->
+<nav>
+  <div class="nav-logo">RL.cloud</div>
 
-        <section class="goals">
-            <h2>🎯 Career Aim</h2>
-            <p>To become a highly skilled 🎯Cloud Developer, mastering AWS infrastructure, monitoring tools, and effectively handling a
-            wide range of DevOps tools. I aim to build secure, scalable cloud solutions, automate deployments, and contribute to
-            modern cloud-native and DevOps-driven projects that deliver real business value.</p>
-        </section>
+  <ul class="nav-links">
+    <li><a href="#about"><i class="fas fa-user"></i>About</a></li>
+    <li><a href="#skills"><i class="fas fa-code"></i>Skills</a></li>
+    <li><a href="#projects"><i class="fas fa-rocket"></i>Projects</a></li>
+    <li><a href="#certifications"><i class="fas fa-award"></i>Certs</a></li>
+    <li><a href="#experience"><i class="fas fa-briefcase"></i>Experience</a></li>
+    <li><a href="#contact"><i class="fas fa-envelope"></i>Contact</a></li>
+  </ul>
 
-        <section class="skills">
-            <h2>🛠️ Skills</h2>
-            <div class="tags">
-                <span>AWS</span><span>LINUX</span><span>GIT</span><span>GITHUB</span><span>VS CODE</span>
-                <span>EC2</span><span>VPC</span><span>RDS</span><span>TERRAFROM</span><span>CICD</span>
-                <span>ANSIBLE</span><span>DEVOPS..</span>
-            </div>
-        </section>        
+  <div class="nav-actions">
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
+      <i class="fas fa-moon"></i>
+    </button>
+    <div class="hamburger" id="hamburger" role="button" aria-label="Open menu" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
 
-        <section class="projects">
-            <h2>🚀 Projects</h2>
+<!-- Mobile Drawer -->
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <a href="#about"          onclick="closeMobile()"><i class="fas fa-user"></i>About</a>
+  <a href="#skills"         onclick="closeMobile()"><i class="fas fa-code"></i>Skills</a>
+  <a href="#projects"       onclick="closeMobile()"><i class="fas fa-rocket"></i>Projects</a>
+  <a href="#certifications" onclick="closeMobile()"><i class="fas fa-award"></i>Certifications</a>
+  <a href="#experience"     onclick="closeMobile()"><i class="fas fa-briefcase"></i>Experience</a>
+  <a href="#contact"        onclick="closeMobile()"><i class="fas fa-envelope"></i>Contact</a>
+</div>
 
-            <div class="project-card">
-                <h3>🚀 Launch EC2 Instance</h3>
-                <p>A walkthrough of creating and managing a Linux-based EC2 instance on AWS.</p>
-                <a href="https://github.com/rahullengare/launch-EC2-instance" target="_blank">🔗 View on GitHub</a>
-            </div>
+<!-- ══════════ HERO ══════════ -->
+<section id="hero">
+  <div class="hero-content">
+    <div class="hero-badge">&#9729; Available for Cloud Projects</div>
+    <h1 class="hero-name">
+      <span class="name-first">Rahul</span><br>
+      <span class="name-last">Lengare</span>
+    </h1>
+    <div class="hero-typing">
+      <span id="typing-text"></span><span class="typing-cursor"></span>
+    </div>
+    <p class="hero-tagline">
+      Building scalable cloud infrastructure and automating the future — one pipeline at a time.
+    </p>
+    <div class="hero-cta">
+      <a href="#projects" class="btn btn-primary"><i class="fas fa-rocket"></i> View Projects</a>
+      <a href="#contact"  class="btn btn-ghost"><i class="fas fa-envelope"></i> Contact Me</a>
+    </div>
+  </div>
+</section>
 
-            <div class="project-card">
-                <h3>🛡️ Auto Scaling With Application Load Balancer on AWS</h3>
-                <p>Configured Auto Scaling Groups with Load Balancers to scale infrastructure automatically.</p>
-                <a href="https://github.com/rahullengare/Auto-Scaling" target="_blank">🔗 View on GitHub</a>
-            </div>
+<!-- ══════════ ABOUT ══════════ -->
+<section id="about">
+  <div class="about-grid">
 
-            <div class="project-card">
-                <h3>📦 LEMP Server Deployment</h3>
-                <p>Deployed a Linux, Nginx, MySQL, and PHP stack for hosting dynamic web applications securely.</p>
-                <a href="https://github.com/rahullengare/LEMP-Server-Deployment" target="_blank">🔗 View on GitHub</a>
-            </div>
-            
-            <div class="project-card">
-                <h3>💡 LAMP Server Deployment</h3>
-                <p>Set up a Linux, Apache, MySQL, and PHP environment for deploying full-stack web applications.</p>
-                <a href="https://github.com/rahullengare/LAMP-Server-Deployment" target="_blank">🔗 View on GitHub</a>
-            </div>
-
-            <div class="project-card">
-                <h3>🚀 Node.js Application Deployment on EC2</h3>
-                <p>Deployed a Node.js application on an EC2 instance using Nginx as a reverse proxy for production hosting.</p>
-                <a href="https://github.com/rahullengare/Nodejs-Application-Deployment-" target="_blank">🔗 View on GitHub</a>
-            </div>
-            
-            <div class="project-card">
-                <h3>🐍 Python Application Deployment on EC2</h3>
-                <p>Hosted a Python-based web application on an Amazon EC2 instance with optimized deployment practices.</p>
-                <a href="https://github.com/rahullengare/Python-Application-Deployment-" target="_blank">🔗 View on GitHub</a>
-            </div>            
-
-            <div class="project-card">
-                <h3>📝 Creating Registration Form on EC2</h3>
-                <p>Deployed a PHP-based user registration form on an EC2 instance using MySQL and Nginx.</p>
-                <a href="https://github.com/rahullengare/Creating-Registration-Form" target="_blank">🔗 View on GitHub</a>
-            </div>
-            
-            <div class="project-card">
-                <h3>☁️ Creating Registration Form using RDS</h3>
-                <p>Built a cloud-based registration system on EC2 with MySQL hosted on Amazon RDS for scalability.</p>
-                <a href="https://github.com/rahullengare/Creating-Registration-Form-using-RDS" target="_blank">🔗 View on GitHub</a>
-            </div>    
-
-            <div class="project-card">
-                <h3>📝 Three-Tier-Architecture-on-AWS-using-VPC</h3>
-                <p>Secure 3-tier AWS architecture with a proxy, app & db server, RDS, Deploy.</p>
-                <a href="https://github.com/rahullengare/Creating-Registration-Form" target="_blank">🔗 View on GitHub</a>
-            </div>
-            
-            <div class="project-card">
-                <h3>☁️ Migration-of-Database</h3>
-                <p>Migration of Database in EC2 instance to RDS Database.</p>
-                <a href="https://github.com/rahullengare/Creating-Registration-Form-using-RDS" target="_blank">🔗 View on GitHub</a>
-            </div>
-
-            <div class="project-card">
-                <h3>📝 Node-js-app-CICD</h3>
-                <p>Node.js application Deploy on instance via CICD.</p>
-                <a href="https://github.com/rahullengare/Creating-Registration-Form" target="_blank">🔗 View on GitHub</a>
-            </div>
-            
-            <div class="project-card">
-                <h3>☁️ cerate-ec2-terraform</h3>
-                <p>Create of Ec2 instance via terraform.</p>
-                <a href="https://github.com/rahullengare/Creating-Registration-Form-using-RDS" target="_blank">🔗 View on GitHub</a>
-            </div>
-
-            <div class="project-card">
-                <h3>📝 Deployment-of-secure-vpc-using-terraform</h3>
-                <p>Create vpc, igw, sg, instance with a secure infrastructure using the terraform.</p>
-                <a href="https://github.com/rahullengare/Creating-Registration-Form" target="_blank">🔗 View on GitHub</a>
-            </div>
-        </section>
-
-        <section class="contact">
-            <h2>📫 Contact</h2>
-            <p>Email: lengarerahul5@gmail.com</p>
-            <p>GitHub: <a href="https://github.com/rahullengare" target="_blank">@rahullengare</a></p>
-
-        </section>
-
-        <footer>
-            <p>Made with ❤️ by Rahul Lengare · 2025</p>
-        </footer>
+    <div class="about-visual" data-aos="fade-right">
+      <div class="about-avatar-wrap">
+        <div class="about-avatar"><i class="fas fa-cloud"></i></div>
+        <div class="about-ring about-ring-1"></div>
+        <div class="about-ring about-ring-2"></div>
+        <div class="tech-float tech-float-1">AWS</div>
+        <div class="tech-float tech-float-2">K8s</div>
+        <div class="tech-float tech-float-3">Terraform</div>
+      </div>
     </div>
 
-    <script src="script.js"></script>
-</body>
+    <div data-aos="fade-left">
+      <div class="section-label">Who I Am</div>
+      <h2 class="section-title">Cloud Engineer<br>by Passion</h2>
+      <div class="section-divider"></div>
+      <p style="color:var(--text-muted);margin-bottom:1.2rem;font-size:.95rem">
+        I'm a Cloud Developer and DevOps Engineer with hands-on experience designing and deploying
+        scalable, resilient infrastructure on AWS, Azure, and GCP. I love bridging the gap between
+        development and operations.
+      </p>
+      <p style="color:var(--text-muted);margin-bottom:2rem;font-size:.95rem">
+        From containerizing microservices to building CI/CD pipelines and infrastructure-as-code,
+        I thrive in the intersection of code and cloud — crafting systems that are fast, secure, and built to scale.
+      </p>
+      <div class="about-stats">
+        <div class="stat-card glass"><div class="stat-number">3+</div><div class="stat-label">Years Exp.</div></div>
+        <div class="stat-card glass"><div class="stat-number">20+</div><div class="stat-label">Projects</div></div>
+        <div class="stat-card glass"><div class="stat-number">5+</div><div class="stat-label">Certs</div></div>
+      </div>
+      <a href="#" class="btn btn-primary" style="margin-top:.5rem">
+        <i class="fas fa-file-arrow-down"></i> Download Resume
+      </a>
+    </div>
 
+  </div>
+</section>
+
+<!-- ══════════ SKILLS ══════════ -->
+<section id="skills">
+  <div class="section-label" data-aos="fade-up">What I Know</div>
+  <h2 class="section-title" data-aos="fade-up">Technical Skills</h2>
+  <div class="section-divider" data-aos="fade-up"></div>
+
+  <div class="skills-categories">
+
+    <div class="glass skill-category" data-aos="fade-up" data-aos-delay="100">
+      <div class="skill-category-title" style="color:var(--accent)">
+        <i class="fas fa-cloud"></i> Cloud Platforms
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>AWS</span><span>90%</span></div>
+        <div class="skill-bar"><div class="skill-fill fill-blue" data-fill="90"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Azure</span><span>75%</span></div>
+        <div class="skill-bar"><div class="skill-fill fill-blue" data-fill="75"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Google Cloud</span><span>70%</span></div>
+        <div class="skill-bar"><div class="skill-fill fill-blue" data-fill="70"></div></div>
+      </div>
+    </div>
+
+    <div class="glass skill-category" data-aos="fade-up" data-aos-delay="200">
+      <div class="skill-category-title" style="color:var(--accent2)">
+        <i class="fas fa-gears"></i> DevOps Tools
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Docker</span><span>92%</span></div>
+        <div class="skill-bar"><div class="skill-fill fill-purple" data-fill="92"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Kubernetes</span><span>85%</span></div>
+        <div class="skill-bar"><div class="skill-fill fill-purple" data-fill="85"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Terraform</span><span>88%</span></div>
+        <div class="skill-bar"><div class="skill-fill fill-purple" data-fill="88"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Jenkins / GitHub Actions</span><span>80%</span></div>
+        <div class="skill-bar"><div class="skill-fill fill-purple" data-fill="80"></div></div>
+      </div>
+    </div>
+
+    <div class="glass skill-category" data-aos="fade-up" data-aos-delay="300">
+      <div class="skill-category-title" style="color:var(--accent3)">
+        <i class="fas fa-code"></i> Programming
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Python</span><span>85%</span></div>
+        <div class="skill-bar"><div class="skill-fill fill-cyan" data-fill="85"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>JavaScript</span><span>78%</span></div>
+        <div class="skill-bar"><div class="skill-fill fill-cyan" data-fill="78"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>Node.js</span><span>70%</span></div>
+        <div class="skill-bar"><div class="skill-fill fill-cyan" data-fill="70"></div></div>
+      </div>
+      <div class="skill-item">
+        <div class="skill-header"><span>HTML / CSS</span><span>90%</span></div>
+        <div class="skill-bar"><div class="skill-fill fill-cyan" data-fill="90"></div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ PROJECTS ══════════ -->
+<section id="projects">
+  <div class="section-label" data-aos="fade-up">What I've Built</div>
+  <h2 class="section-title" data-aos="fade-up">Projects</h2>
+  <div class="section-divider" data-aos="fade-up"></div>
+
+  <div class="filter-tabs" data-aos="fade-up">
+    <button class="filter-tab active" data-filter="all">All</button>
+    <button class="filter-tab" data-filter="cloud">Cloud</button>
+    <button class="filter-tab" data-filter="devops">DevOps</button>
+    <button class="filter-tab" data-filter="web">Web</button>
+    <button class="filter-tab" data-filter="automation">Automation</button>
+  </div>
+
+  <div class="projects-grid">
+
+    <div class="glass project-card" data-category="cloud" data-aos="fade-up">
+      <div class="project-thumb">&#9729;
+        <div class="project-thumb-overlay">
+          <a href="#" class="btn btn-ghost" style="padding:.5rem 1rem;font-size:.8rem">Demo</a>
+          <a href="#" class="btn btn-ghost" style="padding:.5rem 1rem;font-size:.8rem">GitHub</a>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-tags"><span class="project-tag">AWS</span><span class="project-tag">S3</span><span class="project-tag">CloudFront</span></div>
+        <div class="project-title">Multi-Region AWS Static Hosting</div>
+        <p class="project-desc">Deployed a highly available static website across multiple AWS regions with CloudFront CDN, Route53 failover, and automated SSL management.</p>
+        <div class="project-links">
+          <a href="#" class="project-link"><i class="fas fa-arrow-up-right-from-square"></i> Live</a>
+          <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass project-card" data-category="devops" data-aos="fade-up" data-aos-delay="100">
+      <div class="project-thumb">&#9881;
+        <div class="project-thumb-overlay">
+          <a href="#" class="btn btn-ghost" style="padding:.5rem 1rem;font-size:.8rem">Demo</a>
+          <a href="#" class="btn btn-ghost" style="padding:.5rem 1rem;font-size:.8rem">GitHub</a>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-tags"><span class="project-tag">Docker</span><span class="project-tag">Kubernetes</span><span class="project-tag">Helm</span></div>
+        <div class="project-title">Kubernetes Microservices Platform</div>
+        <p class="project-desc">Containerized a Node.js app with Docker, orchestrated on EKS with Helm charts, HPA autoscaling, and Prometheus/Grafana monitoring.</p>
+        <div class="project-links">
+          <a href="#" class="project-link"><i class="fas fa-arrow-up-right-from-square"></i> Live</a>
+          <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass project-card" data-category="devops" data-aos="fade-up" data-aos-delay="200">
+      <div class="project-thumb">&#x1F501;
+        <div class="project-thumb-overlay">
+          <a href="#" class="btn btn-ghost" style="padding:.5rem 1rem;font-size:.8rem">Demo</a>
+          <a href="#" class="btn btn-ghost" style="padding:.5rem 1rem;font-size:.8rem">GitHub</a>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-tags"><span class="project-tag">GitHub Actions</span><span class="project-tag">Terraform</span><span class="project-tag">AWS</span></div>
+        <div class="project-title">IaC CI/CD Pipeline</div>
+        <p class="project-desc">Fully automated infrastructure provisioning with Terraform Cloud and GitHub Actions. Includes plan/apply gating, drift detection, and Slack alerts.</p>
+        <div class="project-links">
+          <a href="#" class="project-link"><i class="fas fa-arrow-up-right-from-square"></i> Live</a>
+          <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass project-card" data-category="cloud" data-aos="fade-up">
+      <div class="project-thumb">&#x1F512;
+        <div class="project-thumb-overlay">
+          <a href="#" class="btn btn-ghost" style="padding:.5rem 1rem;font-size:.8rem">Demo</a>
+          <a href="#" class="btn btn-ghost" style="padding:.5rem 1rem;font-size:.8rem">GitHub</a>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-tags"><span class="project-tag">AWS IAM</span><span class="project-tag">VPC</span><span class="project-tag">GuardDuty</span></div>
+        <div class="project-title">Zero-Trust Cloud Security Framework</div>
+        <p class="project-desc">Designed a least-privilege IAM architecture with service control policies, private VPC subnets, WAF rules, and automated security alert responses.</p>
+        <div class="project-links">
+          <a href="#" class="project-link"><i class="fas fa-arrow-up-right-from-square"></i> Live</a>
+          <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass project-card" data-category="automation" data-aos="fade-up" data-aos-delay="100">
+      <div class="project-thumb">&#x1F916;
+        <div class="project-thumb-overlay">
+          <a href="#" class="btn btn-ghost" style="padding:.5rem 1rem;font-size:.8rem">Demo</a>
+          <a href="#" class="btn btn-ghost" style="padding:.5rem 1rem;font-size:.8rem">GitHub</a>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-tags"><span class="project-tag">Python</span><span class="project-tag">Lambda</span><span class="project-tag">EventBridge</span></div>
+        <div class="project-title">Cloud Cost Optimizer Bot</div>
+        <p class="project-desc">Automated AWS cost analysis with Lambda functions and EventBridge. Identifies idle resources, right-sizing opportunities, and sends weekly reports.</p>
+        <div class="project-links">
+          <a href="#" class="project-link"><i class="fas fa-arrow-up-right-from-square"></i> Live</a>
+          <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="glass project-card" data-category="web" data-aos="fade-up" data-aos-delay="200">
+      <div class="project-thumb">&#x1F310;
+        <div class="project-thumb-overlay">
+          <a href="#" class="btn btn-ghost" style="padding:.5rem 1rem;font-size:.8rem">Demo</a>
+          <a href="#" class="btn btn-ghost" style="padding:.5rem 1rem;font-size:.8rem">GitHub</a>
+        </div>
+      </div>
+      <div class="project-body">
+        <div class="project-tags"><span class="project-tag">Node.js</span><span class="project-tag">MongoDB</span><span class="project-tag">AWS ECS</span></div>
+        <div class="project-title">Serverless API Platform</div>
+        <p class="project-desc">RESTful API built with Node.js and MongoDB Atlas, deployed on AWS ECS Fargate with API Gateway, auto-scaling, and distributed tracing via X-Ray.</p>
+        <div class="project-links">
+          <a href="#" class="project-link"><i class="fas fa-arrow-up-right-from-square"></i> Live</a>
+          <a href="#" class="project-link"><i class="fab fa-github"></i> Code</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ CERTIFICATIONS ══════════ -->
+<section id="certifications">
+  <div class="section-label" data-aos="fade-up">Credentials</div>
+  <h2 class="section-title" data-aos="fade-up">Certifications</h2>
+  <div class="section-divider" data-aos="fade-up"></div>
+
+  <div class="certs-grid">
+
+    <div class="glass cert-card" data-aos="fade-up">
+      <span class="cert-status">Active</span>
+      <div class="cert-badge"><i class="fab fa-aws"></i></div>
+      <div class="cert-org">Amazon Web Services</div>
+      <div class="cert-name">AWS Solutions Architect Associate</div>
+      <div class="cert-year">2023</div>
+    </div>
+
+    <div class="glass cert-card" data-aos="fade-up" data-aos-delay="100">
+      <span class="cert-status">Active</span>
+      <div class="cert-badge" style="background:var(--gradient2)"><i class="fab fa-aws"></i></div>
+      <div class="cert-org">Amazon Web Services</div>
+      <div class="cert-name">AWS Cloud Practitioner</div>
+      <div class="cert-year">2022</div>
+    </div>
+
+    <div class="glass cert-card" data-aos="fade-up" data-aos-delay="200">
+      <span class="cert-status">Active</span>
+      <div class="cert-badge" style="background:linear-gradient(135deg,#00b4db,#0083b0)"><i class="fab fa-microsoft"></i></div>
+      <div class="cert-org">Microsoft Azure</div>
+      <div class="cert-name">AZ-900 Cloud Fundamentals</div>
+      <div class="cert-year">2023</div>
+    </div>
+
+    <div class="glass cert-card" data-aos="fade-up" data-aos-delay="300">
+      <span class="cert-status">Active</span>
+      <div class="cert-badge" style="background:linear-gradient(135deg,#4285f4,#34a853)"><i class="fab fa-google"></i></div>
+      <div class="cert-org">Google Cloud</div>
+      <div class="cert-name">Associate Cloud Engineer</div>
+      <div class="cert-year">2024</div>
+    </div>
+
+    <div class="glass cert-card" data-aos="fade-up" data-aos-delay="400">
+      <span class="cert-status">Active</span>
+      <div class="cert-badge" style="background:linear-gradient(135deg,#764abc,#5a3698)"><i class="fas fa-dharmachakra"></i></div>
+      <div class="cert-org">CNCF</div>
+      <div class="cert-name">Certified Kubernetes Admin (CKA)</div>
+      <div class="cert-year">2024</div>
+    </div>
+
+    <div class="glass cert-card" data-aos="fade-up" data-aos-delay="500">
+      <span class="cert-status">Active</span>
+      <div class="cert-badge" style="background:linear-gradient(135deg,#e8534c,#c0392b)"><i class="fas fa-shield-halved"></i></div>
+      <div class="cert-org">HashiCorp</div>
+      <div class="cert-name">Terraform Associate</div>
+      <div class="cert-year">2024</div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ EXPERIENCE ══════════ -->
+<section id="experience">
+  <div class="section-label" data-aos="fade-up">Career Path</div>
+  <h2 class="section-title" data-aos="fade-up">Experience</h2>
+  <div class="section-divider" data-aos="fade-up"></div>
+
+  <div class="timeline" data-aos="fade-up">
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">Jan 2024 – Present</div>
+      <div class="timeline-role">Cloud &amp; DevOps Engineer</div>
+      <div class="timeline-company">Tech Solutions Pvt. Ltd. · Pune, India</div>
+      <ul class="timeline-points">
+        <li>Architected multi-region AWS deployments reducing latency by 40%</li>
+        <li>Automated infrastructure provisioning with Terraform, cutting delivery time by 60%</li>
+        <li>Built CI/CD pipelines with GitHub Actions and Jenkins for 10+ microservices</li>
+        <li>Managed EKS clusters with Helm and Kustomize for zero-downtime deployments</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">Jun 2022 – Dec 2023</div>
+      <div class="timeline-role">Cloud Developer</div>
+      <div class="timeline-company">CloudInfra Systems · Remote</div>
+      <ul class="timeline-points">
+        <li>Designed scalable serverless architectures using AWS Lambda and API Gateway</li>
+        <li>Containerized legacy monolithic applications into Docker microservices</li>
+        <li>Implemented AWS Cost Explorer dashboards reducing cloud spend by 25%</li>
+        <li>Integrated Prometheus + Grafana for real-time infrastructure observability</li>
+      </ul>
+    </div>
+
+    <div class="timeline-item">
+      <div class="timeline-dot"></div>
+      <div class="timeline-meta">Jan 2022 – May 2022</div>
+      <div class="timeline-role">Cloud Intern</div>
+      <div class="timeline-company">StartupXYZ · Pune, India</div>
+      <ul class="timeline-points">
+        <li>Assisted with AWS resource provisioning and IAM policy management</li>
+        <li>Wrote Python scripts for automated backup and snapshot operations</li>
+        <li>Supported migration of on-premises workloads to AWS EC2 and RDS</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ CONTACT ══════════ -->
+<section id="contact">
+  <div class="section-label" data-aos="fade-up">Get In Touch</div>
+  <h2 class="section-title" data-aos="fade-up">Let's Build<br>Something Great</h2>
+  <div class="section-divider" data-aos="fade-up"></div>
+
+  <div class="contact-grid">
+
+    <div class="contact-info" data-aos="fade-right">
+      <div class="contact-item">
+        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+        <div>
+          <div class="contact-label">Email</div>
+          <div class="contact-value">rahul@rahullengare.cloud</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon"><i class="fas fa-location-dot"></i></div>
+        <div>
+          <div class="contact-label">Location</div>
+          <div class="contact-value">Pune, Maharashtra, India</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon"><i class="fas fa-globe"></i></div>
+        <div>
+          <div class="contact-label">Website</div>
+          <div class="contact-value">rahullengare.cloud</div>
+        </div>
+      </div>
+      <div class="social-links">
+        <a href="#" class="social-link" aria-label="GitHub"><i class="fab fa-github"></i></a>
+        <a href="#" class="social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+        <a href="#" class="social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+        <a href="#" class="social-link" aria-label="Email"><i class="fas fa-envelope"></i></a>
+      </div>
+    </div>
+
+    <form class="contact-form glass" id="contactForm" style="padding:2rem;border-radius:var(--radius)" data-aos="fade-left">
+      <div class="form-group">
+        <label class="form-label">Your Name</label>
+        <input type="text" class="form-input" id="formName" placeholder="John Doe" autocomplete="name">
+        <div class="form-error" id="nameError">Please enter your name.</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-input" id="formEmail" placeholder="john@example.com" autocomplete="email">
+        <div class="form-error" id="emailError">Please enter a valid email.</div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Message</label>
+        <textarea class="form-textarea" id="formMessage" placeholder="Tell me about your project..."></textarea>
+        <div class="form-error" id="msgError">Please write a message.</div>
+      </div>
+      <div class="form-success" id="formSuccess">&#10003; Message sent! I'll get back to you soon.</div>
+      <button type="submit" class="btn btn-primary" style="width:100%;justify-content:center">
+        <i class="fas fa-paper-plane"></i> Send Message
+      </button>
+    </form>
+
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="footer-logo">RL.cloud</div>
+  <div class="footer-copy">&#169; 2025 Rahul Lengare. Built with &#9729; and passion.</div>
+  <nav class="footer-nav">
+    <a href="#about">About</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</footer>
+
+<button id="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+/* ═══ INIT ═══ */
+document.addEventListener('DOMContentLoaded', () => {
+  AOS.init({ duration:700, easing:'ease-out-cubic', once:true, offset:80 });
+  initParticles();
+  initTyping();
+  initScrollProgress();
+  initThemeToggle();
+  initHamburger();
+  initSkillBars();
+  initProjectFilter();
+  initContactForm();
+  initBackToTop();
+  initActiveNav();
+});
+
+/* ═══ PARTICLES ═══ */
+function initParticles() {
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize() { W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+  resize();
+  window.addEventListener('resize', resize);
+
+  class Particle {
+    constructor() { this.reset(); }
+    reset() {
+      this.x = Math.random()*W; this.y = Math.random()*H;
+      this.r = Math.random()*2+0.5;
+      this.dx = (Math.random()-0.5)*0.4; this.dy = (Math.random()-0.5)*0.4-0.2;
+      this.alpha = Math.random()*0.5+0.1;
+      this.type = Math.random()>0.8?'cloud':'dot';
+    }
+    update() {
+      this.x+=this.dx; this.y+=this.dy;
+      if(this.y<-20||this.x<-50||this.x>W+50) this.reset();
+    }
+    draw() {
+      ctx.save(); ctx.globalAlpha = this.alpha;
+      if(this.type==='cloud') {
+        ctx.fillStyle='#3b82f6'; ctx.font=`${this.r*8}px sans-serif`;
+        ctx.fillText('☁',this.x,this.y);
+      } else {
+        ctx.beginPath(); ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
+        ctx.fillStyle=Math.random()>0.5?'#3b82f6':'#8b5cf6'; ctx.fill();
+      }
+      ctx.restore();
+    }
+  }
+
+  for(let i=0;i<80;i++) particles.push(new Particle());
+
+  function drawLines() {
+    for(let i=0;i<particles.length;i++) {
+      for(let j=i+1;j<particles.length;j++) {
+        const d=Math.hypot(particles[i].x-particles[j].x,particles[i].y-particles[j].y);
+        if(d<100) {
+          ctx.save(); ctx.globalAlpha=(1-d/100)*0.06;
+          ctx.strokeStyle='#3b82f6'; ctx.lineWidth=0.5;
+          ctx.beginPath(); ctx.moveTo(particles[i].x,particles[i].y);
+          ctx.lineTo(particles[j].x,particles[j].y); ctx.stroke(); ctx.restore();
+        }
+      }
+    }
+  }
+
+  (function animate() {
+    ctx.clearRect(0,0,W,H);
+    particles.forEach(p=>{p.update();p.draw();});
+    drawLines(); requestAnimationFrame(animate);
+  })();
+}
+
+/* ═══ TYPING ═══ */
+function initTyping() {
+  const roles = ['Cloud Developer','DevOps Engineer','AWS Specialist','Infrastructure Architect','Kubernetes Enthusiast'];
+  const el = document.getElementById('typing-text');
+  let ri=0, ci=0, deleting=false;
+  function type() {
+    const cur=roles[ri];
+    if(!deleting) { el.textContent=cur.slice(0,++ci); if(ci===cur.length){deleting=true;setTimeout(type,1800);return;} }
+    else { el.textContent=cur.slice(0,--ci); if(ci===0){deleting=false;ri=(ri+1)%roles.length;} }
+    setTimeout(type, deleting?60:110);
+  }
+  type();
+}
+
+/* ═══ SCROLL PROGRESS ═══ */
+function initScrollProgress() {
+  const bar = document.getElementById('scroll-progress');
+  window.addEventListener('scroll', () => {
+    bar.style.width = (window.scrollY/(document.body.scrollHeight-window.innerHeight)*100)+'%';
+  });
+}
+
+/* ═══ THEME TOGGLE ═══ */
+function initThemeToggle() {
+  const btn=document.getElementById('themeToggle'), html=document.documentElement;
+  btn.addEventListener('click', () => {
+    const dark=html.dataset.theme==='dark';
+    html.dataset.theme=dark?'light':'dark';
+    btn.innerHTML=dark?'<i class="fas fa-sun"></i>':'<i class="fas fa-moon"></i>';
+  });
+}
+
+/* ═══ HAMBURGER ═══ */
+function initHamburger() {
+  const btn=document.getElementById('hamburger'), nav=document.getElementById('mobileNav');
+  btn.addEventListener('click', () => {
+    const open=nav.classList.toggle('open');
+    nav.setAttribute('aria-hidden', String(!open));
+  });
+}
+function closeMobile() {
+  const nav=document.getElementById('mobileNav');
+  nav.classList.remove('open'); nav.setAttribute('aria-hidden','true');
+}
+
+/* ═══ SKILL BARS ═══ */
+function initSkillBars() {
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting) e.target.querySelectorAll('.skill-fill').forEach(f => f.style.width=f.dataset.fill+'%');
+    });
+  }, {threshold:0.3});
+  document.querySelectorAll('.skill-category').forEach(el=>obs.observe(el));
+}
+
+/* ═══ PROJECT FILTER ═══ */
+function initProjectFilter() {
+  const tabs=document.querySelectorAll('.filter-tab'), cards=document.querySelectorAll('.project-card');
+  tabs.forEach(tab => tab.addEventListener('click', () => {
+    tabs.forEach(t=>t.classList.remove('active')); tab.classList.add('active');
+    const f=tab.dataset.filter;
+    cards.forEach(c=>c.classList.toggle('hidden', f!=='all'&&c.dataset.category!==f));
+  }));
+}
+
+/* ═══ CONTACT FORM ═══ */
+function initContactForm() {
+  document.getElementById('contactForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const name=document.getElementById('formName');
+    const email=document.getElementById('formEmail');
+    const msg=document.getElementById('formMessage');
+    const nErr=document.getElementById('nameError');
+    const eErr=document.getElementById('emailError');
+    const mErr=document.getElementById('msgError');
+    [nErr,eErr,mErr].forEach(el=>el.classList.remove('show'));
+    let ok=true;
+    if(!name.value.trim()){nErr.classList.add('show');ok=false;}
+    if(!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)){eErr.classList.add('show');ok=false;}
+    if(!msg.value.trim()){mErr.classList.add('show');ok=false;}
+    if(ok){
+      const s=document.getElementById('formSuccess');
+      s.classList.add('show'); e.target.reset();
+      setTimeout(()=>s.classList.remove('show'),5000);
+    }
+  });
+}
+
+/* ═══ ACTIVE NAV ═══ */
+function initActiveNav() {
+  const sections=document.querySelectorAll('section[id]');
+  const links=document.querySelectorAll('.nav-links li a');
+  const obs=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        links.forEach(l=>{
+          l.classList.remove('active');
+          if(l.getAttribute('href')==='#'+entry.target.id) l.classList.add('active');
+        });
+      }
+    });
+  },{threshold:0.45});
+  sections.forEach(s=>obs.observe(s));
+}
+
+/* ═══ BACK TO TOP ═══ */
+function initBackToTop() {
+  const btn=document.getElementById('back-to-top');
+  window.addEventListener('scroll',()=>btn.classList.toggle('visible',window.scrollY>400));
+  btn.addEventListener('click',()=>window.scrollTo({top:0,behavior:'smooth'}));
+}
+</script>
+</body>
 </html>
