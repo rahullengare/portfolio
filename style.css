@@ -1,32 +1,8 @@
 /* ══════════════════════════════════════════════════
-   CSS VARIABLES
+   CSS VARIABLES - DEFAULT (LIGHT THEME)
 ══════════════════════════════════════════════════ */
 :root {
-    --bg: #060812;
-    --bg2: #0c1022;
-    --bg3: #111827;
-    --surface: rgba(255, 255, 255, 0.8);
-    --surface-hover: rgba(255, 255, 255, 0.08);
-    --border: rgba(0, 0, 0, 0.1);
-    --border-bright: rgba(100, 180, 255, 0.25);
-    --text: #1a1a1a;
-    --text-muted: #7a8a9e;
-    --accent: #3b82f6;
-    --accent2: #8b5cf6;
-    --accent3: #06b6d4;
-    --glow: rgba(59, 130, 246, 0.4);
-    --glow2: rgba(139, 92, 246, 0.3);
-    --gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
-    --gradient2: linear-gradient(135deg, #06b6d4, #3b82f6);
-    --font-display: Cambria, 'Georgia', 'Times New Roman', serif;
-    --font-mono: 'Space Mono', monospace;
-    --font-body: Cambria, 'Georgia', 'Times New Roman', serif;
-    --radius: 16px;
-    --radius-sm: 8px;
-    --ease: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-[data-theme="light"] {
+    /* Backgrounds for Light Mode */
     --bg: #f0f4fc;
     --bg2: #e4ebf7;
     --bg3: #d8e2f0;
@@ -36,15 +12,40 @@
     --border-bright: rgba(59, 130, 246, 0.35);
     --text: #0f172a;
     --text-muted: #475569;
+
+    /* Global Colors */
+    --accent: #3b82f6;
+    --accent2: #8b5cf6;
+    --accent3: #06b6d4;
     --glow: rgba(59, 130, 246, 0.2);
     --glow2: rgba(139, 92, 246, 0.15);
+    --gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
+    --gradient2: linear-gradient(135deg, #06b6d4, #3b82f6);
+
+    /* Fonts & Utils */
+    --font-display: Cambria, 'Georgia', serif;
+    --font-mono: 'Space Mono', monospace;
+    --font-body: Cambria, 'Georgia', serif;
+    --radius: 16px;
+    --ease: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
+
+/* ══════════════════════════════════════════════════
+   DARK THEME (Activated by Gear Icon)
+══════════════════════════════════════════════════ */
 [data-theme="dark"] {
-    /* DARK THEME (Activated by Gear Icon) */
+    --bg: #060812;
+    --bg2: #0c1022;
+    --bg3: #111827;
     --surface: rgba(0, 0, 0, 0.6);
-    --text: #f0f0f0;
+    --surface-hover: rgba(255, 255, 255, 0.08);
     --border: rgba(255, 255, 255, 0.1);
+    --border-bright: rgba(100, 180, 255, 0.25);
+    --text: #f0f0f0;
+    --text-muted: #7a8a9e;
     --accent: #59e9f7;
+    /* Your signature Cyan */
+    --glow: rgba(59, 130, 246, 0.4);
 }
 
 /* ══════════════════════════════════════════════════
