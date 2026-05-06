@@ -114,41 +114,30 @@ document.addEventListener('DOMContentLoaded', () => {
 }
 
 /* ═══ THEME TOGGLE ═══ */
-/* ═══ THEME TOGGLE (Persistent) ═══ */
 function initThemeToggle() {
   const btn = document.getElementById('themeToggle');
   const themeIcon = document.getElementById('themeIcon');
   const html = document.documentElement;
 
-  // 1. Determine the starting theme
-  // Priority: 1. Saved Preference, 2. Default to 'light'
-  const savedTheme = localStorage.getItem('portfolio-theme') || 'light';
+  // This part handles the icon on refresh
+  const currentTheme = html.dataset.theme; // Already set by your snippet
+  if (currentTheme === 'dark') {
+    themeIcon.className = 'fas fa-cog';
+  } else {
+    themeIcon.className = 'fas fa-moon';
+  }
 
-  // Apply the theme immediately on load
-  html.dataset.theme = savedTheme;
-  updateIcon(savedTheme);
-
-  // 2. Handle the click event
   btn.addEventListener('click', () => {
-    const currentTheme = html.dataset.theme;
-    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    const isDark = html.dataset.theme === 'dark';
+    const newTheme = isDark ? 'light' : 'dark';
 
     html.dataset.theme = newTheme;
-    updateIcon(newTheme);
+    themeIcon.className = newTheme === 'dark' ? 'fas fa-cog' : 'fas fa-moon';
 
-    // Save choice for next time
     localStorage.setItem('portfolio-theme', newTheme);
   });
-
-  // Helper to switch the icon
-  function updateIcon(theme) {
-    if (theme === 'dark') {
-      themeIcon.className = 'fas fa-cog'; // Gear for Dark
-    } else {
-      themeIcon.className = 'fas fa-moon'; // Moon for Light
-    }
-  }
 }
+
     /* ═══ HAMBURGER ═══ */
     function initHamburger() {
   const btn=document.getElementById('hamburger'), nav=document.getElementById('mobileNav');
