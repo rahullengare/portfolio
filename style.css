@@ -5,11 +5,11 @@
     --bg: #060812;
     --bg2: #0c1022;
     --bg3: #111827;
-    --surface: rgba(255, 255, 255, 0.04);
+    --surface: rgba(255, 255, 255, 0.8);
     --surface-hover: rgba(255, 255, 255, 0.08);
-    --border: rgba(255, 255, 255, 0.08);
+    --border: rgba(0, 0, 0, 0.1);
     --border-bright: rgba(100, 180, 255, 0.25);
-    --text: #e8edf5;
+    --text: #1a1a1a;
     --text-muted: #7a8a9e;
     --accent: #3b82f6;
     --accent2: #8b5cf6;
@@ -38,6 +38,13 @@
     --text-muted: #475569;
     --glow: rgba(59, 130, 246, 0.2);
     --glow2: rgba(139, 92, 246, 0.15);
+}
+[data-theme="dark"] {
+    /* DARK THEME (Activated by Gear Icon) */
+    --surface: rgba(0, 0, 0, 0.6);
+    --text: #f0f0f0;
+    --border: rgba(255, 255, 255, 0.1);
+    --accent: #59e9f7;
 }
 
 /* ══════════════════════════════════════════════════
